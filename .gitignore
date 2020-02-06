@@ -1,0 +1,7 @@
+.vscode
+client/.next
+client/node_modules
+mysql
+server/.vscode
+server/env
+server/staticfiles

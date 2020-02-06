@@ -1,23 +1,11 @@
-# pull official base image
-FROM python:3.9.0a1-alpine 
+FROM node:alpine as builder
+WORKDIR '/app'
+COPY ./package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# set work directory
-WORKDIR /usr/src/app
-
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add --no-cache mariadb-dev
-
-RUN pip install mysqlclient
-# install dependencies
-RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/src/app/requirements.txt
-RUN pip install -r requirements.txt
-
-# copy project
-COPY . /usr/src/app/
-
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+FROM nginx
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html
