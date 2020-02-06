@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "wuruportal",
+            "dialect": "MariaDB",
+            "name": "wuru",
+            "password": "PASSWORD",
+            "port": 3306,
+            "server": "localhost",
+            "username": "sa"
+        },
+        {
+            "database": "acamicaportal",
+            "dialect": "MySQL",
+            "name": "acamica",
+            "password": "PASSWORD",
+            "port": 3306,
+            "server": "localhost",
+            "username": "sa"
+        }
+    ]
+}
