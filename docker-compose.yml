@@ -31,7 +31,7 @@ services:
       MYSQL_USER: sa
       MYSQL_PASSWORD: PASSWORD
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ../../db/mysql:/var/lib/mysql
 
 volumes:
   mysql:
